@@ -1,0 +1,21 @@
+.treeBase {
+	font-family: monospace;
+}
+
+.indent {
+	padding-left: calc(1em - 1px);
+	margin-left: 1px;
+	border-left: 1px dashed var(--text-color-dim);
+}
+
+.expandable {
+	cursor: pointer;
+}
+
+.treeKey {
+}
+
+.key,
+.typeName {
+	color: var(--text-color-dim);
+}

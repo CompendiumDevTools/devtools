@@ -1,0 +1,60 @@
+:root {
+	--background-color: #202124;
+	--background-color-light: #292a2d;
+	--text-color: #cfd0d0;
+	--text-color-dim: rgb(154, 160, 166);
+	--accent-color: #494c50;
+	--accent-color-25: #494c503f;
+	--accent-color-50: #494c507f;
+	--accent-color-75: #494c50bf;
+}
+
+a {
+	color: inherit;
+}
+* {
+	position: relative;
+	user-select: none;
+	-webkit-user-drag: none;
+}
+
+html,
+body,
+#root {
+	height: 100vh;
+	background-color: var(--background-color);
+	color: var(--text-color);
+	font-size: 14px;
+	overflow: hidden;
+	margin: 0;
+}
+
+body {
+	display: grid;
+	grid-template-rows: auto;
+	grid-template-columns: auto;
+}
+
+#root {
+	display: flex;
+	flex-direction: column;
+}
+
+::-webkit-scrollbar {
+	cursor: pointer;
+	width: 8px;
+	background-color: var(--background-color);
+}
+::-webkit-scrollbar-button {
+	display: none;
+}
+::-webkit-scrollbar-thumb {
+	border-radius: 3px;
+	background-color: var(--accent-color-25);
+}
+::-webkit-scrollbar-thumb:hover {
+	background-color: var(--accent-color-50);
+}
+::-webkit-scrollbar-thumb:active {
+	background-color: var(--accent-color-75);
+}

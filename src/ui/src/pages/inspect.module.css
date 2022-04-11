@@ -1,0 +1,47 @@
+.inspectPanel {
+	display: grid;
+	height: 100%;
+}
+
+.inspectHistory {
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	gap: 6px;
+	padding: 6px;
+}
+
+.inspectHistoryButton {
+	cursor: pointer;
+	background-color: var(--accent-color-25);
+
+	transition-duration: 0.2s;
+	transition-property: background-color;
+
+	padding: 3px;
+	border-radius: 6px;
+
+	/* border-bottom: 1px solid var(--accent-color); */
+	&:last-of-type {
+		border-bottom: none;
+	}
+
+	&:hover {
+		background-color: var(--accent-color-50);
+	}
+	&.selected {
+		background-color: var(--accent-color-75);
+	}
+}
+
+.inspectPoint {
+	display: flex;
+	flex-direction: column;
+	overflow-y: hidden;
+	.inspectPointContent {
+		padding: 6px;
+		flex: 1 1 auto;
+		overflow-y: auto;
+	}
+}
