@@ -1,5 +1,9 @@
 <img src="https://assets.solidjs.com/banner?project=Compendium%20DevTools" />
 
+## ⚠️ The `master` branch of the repo will remain unchanged until the end of SolidHack voting! 
+
+## ⚠️ If you would like to see the current progress of this project, please view the [`dev` branch](https://github.com/CompendiumDevTools/library/branch/dev).
+
 A framework-agnostic devtools extension made for SolidHack.
 
 ## Features
@@ -45,7 +49,19 @@ Currently there are only instrcutions to run the dev environment from source.
 ```bash
 pnpm i 
 pnpm run dev
+cd ./src/ui
+pnpm i
+cd ../..
 pnpm run dev-ui
 # Copy the manifest.json into the ./dist directory.
-pnpm run dev-start
 ```
+
+Next you can either run a blank test environment with `web-ext` or import the extension to your browser.
+
+If you want to do the former, just run this command:
+
+```bash
+​pnpm run dev-start
+```
+
+If you do the latter, you need to enable developer mode in the browser's extension page before you can import it.
