@@ -32,6 +32,10 @@ The state tree displayed in the video now looks like this:
 
 ![State Tree](./previews/state-tree.png)
 
+In the next video, the Solid connector is being used on a basic page to observe changes in the components and signals and send them to the currently unfinished devtools panel.
+
+https://user-images.githubusercontent.com/40003440/162839893-3d234efa-8242-475e-939a-5fdd60dadb21.mp4
+
 ## How It Works
 
 First of all, it's of course not possible for Compendium DevTools to work with *every* framework. It's designed to be as flexible as possible, but some frameworks might simply be impossible to connect to because of how they work.
@@ -63,7 +67,7 @@ Next you can either run a blank test environment with `web-ext` or import the ex
 If you want to do the former, just run this command:
 
 ```bash
-​pnpm run dev-start
+pnpm run dev-start
 ```
 
 If you do the latter, you need to enable developer mode in the browser's extension page before you can import it.
