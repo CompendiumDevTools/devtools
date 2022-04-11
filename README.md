@@ -4,6 +4,8 @@
 
 ## ⚠️ If you would like to see the current progress of this project, please view the [`dev` branch](https://github.com/CompendiumDevTools/library/branch/dev).
 
+This project is a work in progress and might not be usable at the current time.
+
 A framework-agnostic devtools extension made for SolidHack.
 
 ## Features

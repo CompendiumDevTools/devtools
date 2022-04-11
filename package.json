@@ -1,7 +1,8 @@
 {
-	"name": "devtools",
-	"version": "1.0.0",
-	"description": "",
+	"name": "compendium-devtools",
+	"version": "0.0.0",
+	"description": "A framework-agnostic devtools extension made for SolidHack.",
+	"info": "A framework-agnostic devtools extension made for SolidHack.",
 	"main": "index.js",
 	"scripts": {
 		"dev": "vite build --watch",
@@ -12,7 +13,15 @@
 		"type": "git",
 		"url": "git+https://github.com/CompendiumDevTools/devtools.git"
 	},
-	"keywords": [],
+	"keywords": [
+		"solidhack",
+		"best_ecosystem",
+		"devtools",
+		"store",
+		"state",
+		"extension",
+		"inspector"
+	],
 	"author": "Kyza",
 	"license": "MIT",
 	"bugs": {
