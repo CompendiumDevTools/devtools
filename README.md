@@ -1,4 +1,4 @@
-<img src="https://assets.solidjs.com/banner?project=Compendium DevTools" />
+<img src="https://assets.solidjs.com/banner?project=Compendium%20DevTools" />
 
 A framework-agnostic devtools extension made for SolidHack.
 
@@ -17,10 +17,14 @@ A framework-agnostic devtools extension made for SolidHack.
 - [ ] State-scoped code executor.
 
 ## Previews
+  
+The following is an old video of the UI since the UI is still being built.
 
-[!Video Demo](./previews/trB4Y367wB.mp4)
+https://user-images.githubusercontent.com/40003440/162802430-4fa480a4-e6b4-445e-b475-53a6832be6cf.mp4
 
-[!State Tree](./previews/state-tree.png)
+The state tree displayed in the video now looks like this:
+
+![State Tree](./previews/state-tree.png)
 
 ## How It Works
 
