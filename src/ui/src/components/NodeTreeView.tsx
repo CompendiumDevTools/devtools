@@ -8,11 +8,16 @@ import Nodes from "../stores/Nodes";
 const NodeTreeView: Component<{
 	globalHistoryIndex: number;
 }> = (props) => {
+	if (props.globalHistoryIndex < 0) {
+		return "Waiting for nodes to be registered...";
+	}
+
 	const globalNodePoints = () => {
 		let availableGlobalNodePoints: { [id: NodeID]: NodePoint } = {};
-		for (const nodeIndex of GlobalHistory[props.globalHistoryIndex]) {
-			availableGlobalNodePoints[nodeIndex.id] =
-				Nodes[nodeIndex.id].history[nodeIndex.historyIndex];
+		for (const [nodeID, nodeIndex] of Object.entries(
+			GlobalHistory[props.globalHistoryIndex]
+		)) {
+			availableGlobalNodePoints[nodeID] = Nodes[nodeID].history[nodeIndex];
 		}
 		return availableGlobalNodePoints;
 	};
@@ -36,12 +41,7 @@ const NodeTreeView: Component<{
 		return rootNodes;
 	};
 
-	return (
-		<ResizeBox direction="horizontal" left={100} right={100}>
-			<NodeTree nodes={rootNodes()} />
-			<NodeInspector />
-		</ResizeBox>
-	);
+	return <NodeTree nodes={rootNodes()} />;
 };
 
 export default NodeTreeView;
@@ -54,7 +54,7 @@ export const NodeTree: Component<{ nodes: NodePoint[] }> = (props) => {
 	);
 };
 
-const NodeTreeItem: Component<{ node: NodePoint }> = (props) => {
+export const NodeTreeItem: Component<{ node: NodePoint }> = (props) => {
 	const currentName = () => props.node.name;
 	return (
 		<span>
@@ -66,6 +66,6 @@ const NodeTreeItem: Component<{ node: NodePoint }> = (props) => {
 	);
 };
 
-export function NodeInspector() {
+export const NodeInspector: Component<{ node: NodePoint }> = (props) => {
 	return <div>NodeInspector</div>;
-}
+};

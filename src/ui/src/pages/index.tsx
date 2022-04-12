@@ -1,7 +1,8 @@
 import { useNavigate } from "solid-app-router";
-import { createMemo, For } from "solid-js";
+import { createEffect, createMemo, For } from "solid-js";
 import NodeTreeView from "../components/NodeTreeView";
 import ResizeBox from "../components/ResizeBox";
+import GlobalHistory from "../stores/GlobalHistory";
 
 import stores from "../stores/Nodes";
 import { selectedStore, setSelectedStore } from "../stores/SelectedNode";
@@ -9,6 +10,13 @@ import { selectedStore, setSelectedStore } from "../stores/SelectedNode";
 export default function SelectPanel() {
 	const navigate = useNavigate();
 
-	return "a";
-	// return <NodeTreeView />;
+	createEffect(() => {
+		console.log(GlobalHistory.length);
+	});
+
+	return (
+		<>
+			<NodeTreeView globalHistoryIndex={GlobalHistory.length - 1} />
+		</>
+	);
 }
