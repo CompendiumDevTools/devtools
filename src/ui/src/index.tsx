@@ -6,13 +6,43 @@ import App from "./app";
 
 import "./index.css";
 
-import Nodes from "./stores/Nodes";
+import Nodes, { NodeID, NodeOptions, NodePoint } from "./stores/Nodes";
 // import deepFreeze from "./utils/";
 import { selectedStore, setSelectedStore } from "./stores/SelectedNode";
 import ResolvedStack from "./utils/ResolvedStack";
+import GlobalHistory from "./stores/GlobalHistory";
 
 // Fix wrong starting URL.
 window.history.replaceState({}, "", "/");
+
+type BaseNodeRequest = {
+	source: string;
+};
+
+type RegisterNodeRequest = BaseNodeRequest & {
+	type: "REGISTER_NODE";
+	options: NodeOptions;
+	point: NodePoint;
+};
+
+type UpdateNodeRequest = BaseNodeRequest & {
+	type: "UPDATE_NODE";
+	point: NodePoint;
+	id: NodeID;
+};
+
+type UnregisterNodeRequest = BaseNodeRequest & {
+	type: "UNREGISTER_NODE";
+	id: NodeID;
+};
+
+type ResetRequest = BaseNodeRequest & { type: "RESET" };
+
+type AnyRequest =
+	| RegisterNodeRequest
+	| UpdateNodeRequest
+	| UnregisterNodeRequest
+	| ResetRequest;
 
 // Create the devtools panel.
 chrome.devtools.panels.create(
@@ -23,15 +53,7 @@ chrome.devtools.panels.create(
 		const tabID = chrome.devtools.inspectedWindow.tabId;
 
 		chrome.runtime.onMessage.addListener(function (
-			request: {
-				id: string;
-				type: string;
-				name: string;
-				source: string;
-				state: TrackedStore;
-				stack: ResolvedStack;
-				actions: string[];
-			},
+			request: AnyRequest,
 			sender,
 			sendResponse
 		) {
@@ -40,45 +62,52 @@ chrome.devtools.panels.create(
 				request.source === "compendium-devtools-extension"
 			) {
 				switch (request.type) {
-					case "REGISTER_STORE":
+					case "RESET":
+						window.location.reload();
+						return;
+					case "REGISTER_NODE":
 						// This is *really* for resetting stores when they are recreated.
 						// So... Reset the history.
-						Nodes[request.id] = {
-							history: [
-								{
-									name: "§INIT§",
-									time: new Date(),
-									data: request.state,
-									actions: request.actions,
-								},
-							],
+
+						console.log("Registering node", request);
+
+						// Set up the node in the Nodes store.
+						Nodes[request.options.id] = {
+							...request.options,
+							history: [request.point],
 						};
-						return Nodes;
-					case "UPDATE_STORE":
-						// If the store doesn't exist, create it.
-						// TODO: Show a warning if the store hasn't been created when calling this. That means it hasn't done INIT which could cause problems with hot module reloaders.
-						const store: TrackedStore = Nodes[request.id];
-						if (store == null) {
-							// TODO: Request all data from content.
-							console.warn(
-								`[Compendium DevTools] Store "${request.id}" updated before creation.`
-							);
-							return Nodes;
-						}
-						store.history.push({
-							name: request.name,
-							time: new Date(),
-							data: request.state,
-							actions: request.actions,
+
+						// Get all the nodes that currently exist and add them to the global history.
+						GlobalHistory.push({
+							...GlobalHistory[GlobalHistory.length - 1],
+							[request.options.id]: 0,
 						});
-						return Nodes;
-					case "DESTROY_STORE":
-						delete Nodes[request.id];
-						if (selectedStore() === request.id) {
-							window.history.pushState({}, "", "/");
-							setSelectedStore(null);
-						}
-						return Nodes;
+						return;
+					case "UPDATE_NODE":
+						console.log("Updating node", request);
+						Nodes[request.id].history.push(request.point);
+
+						// Add one to the history index in the global history.
+						const currentHistory = GlobalHistory[GlobalHistory.length - 1];
+						GlobalHistory.push({
+							...currentHistory,
+							[request.id]: currentHistory.id + 1,
+						});
+
+						return;
+					case "UNREGISTER_NODE":
+						// Remove the node from the global history ONLY.
+						// The node should be kept in the Nodes store because it can be referenced by previous points in the global history.
+						// TODO: Optimze this, I'm rushing.
+						GlobalHistory.push(
+							Object.fromEntries(
+								Object.entries(GlobalHistory[GlobalHistory.length - 1]).filter(
+									([id]) => id !== request.id
+								)
+							)
+						);
+
+						return;
 				}
 			}
 		});
