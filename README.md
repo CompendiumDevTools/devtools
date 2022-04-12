@@ -16,8 +16,8 @@ A framework-agnostic devtools extension made for SolidHack.
 - [ ] Readable and collapsible node tree view.
 - [x] Readable and collapsible state tree view.
 - [x] Extensible and fast serializing of any type with flexible display options.
-- [ ] Globally tracked history.
-- [ ] State-scoped tracked history.
+- [x] Globally tracked history.
+- [x] State-scoped tracked history.
 - [ ] State stacktrace viewer.
 - [ ] State diff viewer.
 - [ ] State-scoped code executor.
