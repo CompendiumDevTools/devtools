@@ -96,6 +96,7 @@ chrome.devtools.panels.create(
 
 						return;
 					case "UNREGISTER_NODE":
+						console.log("Unregistering node", request);
 						// Remove the node from the global history ONLY.
 						// The node should be kept in the Nodes store because it can be referenced by previous points in the global history.
 						// TODO: Optimze this, I'm rushing.

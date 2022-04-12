@@ -2,7 +2,7 @@
 	"name": "compendium-devtools",
 	"version": "0.0.0",
 	"description": "A framework-agnostic devtools extension made for SolidHack.",
-	"info": "A framework-agnostic devtools extension made for SolidHack.",
+	"info": "Why should everything need to build a devtools extension? Compendium-Devtools's goal is to save framework developers and their users time.",
 	"main": "index.js",
 	"scripts": {
 		"dev": "vite build --watch",
