@@ -2,7 +2,7 @@
 
 ## ⚠️ The `master` branch of the repo will remain unchanged until the end of SolidHack voting! 
 
-## ⚠️ If you would like to see the current progress of this project, please view the [`dev` branch](https://github.com/CompendiumDevTools/devtools/branch/dev).
+## ⚠️ If you would like to see the current progress of this project, please view the [`dev` branch](https://github.com/CompendiumDevTools/devtools/tree/dev).
 
 ## ⚠️ This project is a work in progress and might not be usable at the current time.
 
